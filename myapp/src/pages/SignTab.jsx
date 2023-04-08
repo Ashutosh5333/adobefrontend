@@ -1,5 +1,7 @@
 import React from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, useColorModeValue } from "@chakra-ui/react";
+import Login from '../components/Login';
+import Signup from './../components/Signup';
 
 const SignTab = () => {
     const colorScheme = useColorModeValue("blue", "green");
@@ -14,10 +16,10 @@ const SignTab = () => {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {/* <Login/> */}
+              <Login/>
             </TabPanel>
             <TabPanel>
-              {/* <Signup/> */}
+              <Signup />
             </TabPanel>
           </TabPanels>
         </Tabs>
