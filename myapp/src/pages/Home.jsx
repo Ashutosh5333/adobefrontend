@@ -5,9 +5,9 @@ import Dashboard from "../components/Dashboard";
 const Home = () => {
   return (
     <>
-      <Flex w="95vw"   m="auto" border={"2px solid red"} display={{base:"row",md:"flex", lg:"flex"}}   justifyContent={"space-between"} gap={"5"}>
+      <Flex w="95vw"   m="auto"  display={{base:"row",md:"flex", lg:"flex"}}   justifyContent={"space-between"} gap={"5"}>
         
-        <Box   border={"3px solid black"}  w={{base:"90vw",md:"75vw",lg:"75vw"}} >
+        <Box  w={{base:"90vw",md:"75vw",lg:"75vw"}} >
           <Dashboard/>
         </Box>
 
