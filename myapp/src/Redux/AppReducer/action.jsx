@@ -80,6 +80,46 @@ const getsingledataFail = () => {
            }
          }
 
+       // --------------- Delete Post ----------------  //
+
+const DeleteDatareq = () =>{
+   return {
+      type: types.DELETE_DATA_REQUEST
+   }
+} 
+const Deletedatasucess = () => {
+   return {
+      type :types.DELETE_DATA_SUCCESS,
+   }
+}
+const Deletedatafai = () => {
+  return {
+      type :types.DELETE_DATA_FAILURE
+  }
+  }
+  
+  // -------------------- Updated ----------------- //
+
+  const updatedpostReq = () =>{
+   return {
+      type: types.EDIT_DATA_REQUEST,
+   }
+} 
+const updateducess = (payload) => {
+   return {
+      type :types.EDIT_DATA_SUCCESS,
+      payload,
+   }
+}
+const updatedFail = () => {
+  return { 
+      type :types.EDIT_DATA_FAILURE
+  }
+}
+
+
+
+
 
 const token = JSON.parse(localStorage.getItem("token"))
 
@@ -138,27 +178,45 @@ return axios.get(`https://tough-knickers-colt.cyclic.app/post`,{
 }
 
 
+ // ---------------- Delete Post ------------------ //
 
 
-   // ----------------- Add post ------------  //
-
-export const  ADDProducts =(newdata) => (dispatch) => {
-  dispatch(AdddataReq)
-  return axios.post(`https://tough-knickers-colt.cyclic.app/post/create`,newdata ,{
-   headers:{
-      "Content-Type":"application/json",
-      "Authorization":`Bearer ${token}`
-    },
-  })
-   .then((res) => {
-    return   dispatch(AdddataSucess(res.data));
-   }).catch((e)=> {
-   return    dispatch(AdddataFail())
+export const  DeletePost  =(_id) => (dispatch) => {
+   dispatch(DeleteDatareq())
+   return axios.delete(`https://tough-knickers-colt.cyclic.app/post/delete/${_id}`,{
+    headers:{
+       "Content-Type":"application/json",
+       "Authorization":`Bearer ${token}`
+     },
    })
-}
+    .then((res) => {
+     return   dispatch(Deletedatasucess());
+    }).catch((e)=> {
+    return    dispatch(Deletedatafai())
+    })
+ }
+
+ 
+
+export const  UpdatedPost  =(_id,payload) => (dispatch) => {
+   dispatch(updatedpostReq())
+   return axios.patch(`https://tough-knickers-colt.cyclic.app/post/update/${_id}`, payload,{
+    headers:{
+       "Content-Type":"application/json",
+       "Authorization":`Bearer ${token}`
+     },
+   })
+    .then((res) => {
+     return   dispatch(updateducess(res.data));
+    }).catch((e)=> {
+    return    dispatch(updatedFail())
+    })
+ }
 
 
-   
+
+
+
 
 
 

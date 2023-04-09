@@ -1,11 +1,11 @@
-import {  Avatar,  Box,  Button,  ButtonGroup,Divider,  Heading,  Image,   Stack,  Text,  Wrap,  WrapItem,} from "@chakra-ui/react";
+import {  Avatar,  Box,  Button,  ButtonGroup,Divider,  Heading,  Image,   Stack,  Text,  Wrap,  WrapItem, useToast,} from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { AiOutlineLike } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { MdAutoDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllPostData } from "../Redux/AppReducer/action";
+import { DeletePost, getAllPostData } from "../Redux/AppReducer/action";
 import {Link} from "react-router-dom"
 import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
 
@@ -13,13 +13,42 @@ import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
+    const toast = useToast();
    const AllPostlist = useSelector((store) =>store.AppReducer.PostData)
-    console.log(AllPostlist)   
+    // console.log(AllPostlist)   
 
    useEffect(() =>{
      dispatch(getAllPostData)
    },[])
 
+   const handledelete = (_id) =>{
+    dispatch(DeletePost(_id))
+    .then((res) =>{
+      // console.log(res)
+        if(res.type === "DELETE_DATA_SUCCESS"){
+          toast({
+            position: "top",
+            status: "success",
+            title: res.type,
+          });
+        }else{
+          toast({
+            position: "top",
+            status: "success",
+            title: res.type,
+          });
+        }
+      
+    })
+    .catch((err) =>{
+      console.log(err)
+      toast({
+        position: "top",
+        status: "success",
+        title: err,
+      });
+    })
+}
 
 
 
@@ -82,7 +111,7 @@ const Dashboard = () => {
                 Edit
               </Button>
               <Text textAlign={"center"} m="auto">
-                <MdAutoDelete />
+                <MdAutoDelete  onClick={() => handledelete(el._id)} />
               </Text>
             </ButtonGroup>
           </CardFooter>

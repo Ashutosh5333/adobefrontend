@@ -1,24 +1,51 @@
-import { Avatar, Box, Button, Divider, Image, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { Avatar, Box, Button, Divider, Image, Text, Wrap, WrapItem, useToast } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { GetMyPost } from '../../Redux/AppReducer/action';
+import { DeletePost, GetMyPost } from '../../Redux/AppReducer/action';
 import { UserSkeltonlist } from './UserSkeltonlist';
 import UserEdit from './UserEdit';
 
 const UserDashboard = () => {
     const dispatch = useDispatch()
+    const toast = useToast();
     const Mypost = useSelector((store) => store.AppReducer.Mypost)
     // console.log(Mypost)
 
 
      useEffect(() =>{
        dispatch(GetMyPost)
+      
      },[])
   
 
-      const handledelete = () =>{
-
+      const handledelete = (_id) =>{
+          dispatch(DeletePost(_id))
+          .then((res) =>{
+            // console.log(res)
+              if(res.type === "DELETE_DATA_SUCCESS"){
+                toast({
+                  position: "top",
+                  status: "success",
+                  title: res.type,
+                });
+              }else{
+                toast({
+                  position: "top",
+                  status: "success",
+                  title: res.type,
+                });
+              }
+            
+          })
+          .catch((err) =>{
+            console.log(err)
+            toast({
+              position: "top",
+              status: "success",
+              title: err,
+            });
+          })
       }
 
 
@@ -55,7 +82,7 @@ const UserDashboard = () => {
 
 
 
-    <Link to={`/blog/${el._id} `}> 
+    <Link to={`/Allpost/${el._id} `}> 
     
      <Box  display={"flex"} justifyContent={"space-between"} gap="5">
 
