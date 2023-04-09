@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost, getAllPostData } from "../Redux/AppReducer/action";
 import {Link} from "react-router-dom"
 import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
-
+import {BiDislike} from "react-icons/bi"
+import { likepost } from "./likes/PostFetch";
     
 
 const Dashboard = () => {
@@ -103,8 +104,13 @@ const Dashboard = () => {
               <Button>View</Button>
              </Link>
 
-              <Button flex="1" variant="ghost" leftIcon={<AiOutlineLike />}>
+                           
+              <Button flex="1" onClick={() => likepost(el._id)} variant="ghost" leftIcon={<AiOutlineLike />}>
                 Like
+              </Button>
+
+              <Button flex="1" variant="ghost" leftIcon={<BiDislike />}>
+                unLike
               </Button>
 
              <Link to={`/Edit/${el._id}`}>
