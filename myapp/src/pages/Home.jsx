@@ -1,6 +1,8 @@
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading } from "@chakra-ui/react";
 import React from "react";
 import Dashboard from "../components/Dashboard";
+import TopActive from "../components/TopActive";
+import { Link } from "react-router-dom";
 
                                           
 const Home = () => {
@@ -13,7 +15,12 @@ const Home = () => {
         </Box>
 
         <Box  border={"3px solid green"} w={{base:"90vw",md:"25vw",lg:"25vw"}}>
-               Top Active Users
+           <Heading fontSize="1rem" > Top Active Users </Heading>
+               <TopActive/>
+
+               <Link to={`/user`}>
+              <Button colorScheme="red"> SeeAll </Button> 
+               </Link>
         </Box>
 
       </Flex>

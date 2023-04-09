@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Box, Heading, Stack, StackDivider, Avatar, ButtonGroup, Button } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, CardFooter, Box, Heading, Stack, StackDivider, Avatar, ButtonGroup, Button, useToast } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost, GetUserdata } from '../Redux/AuthReducer/action';
@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 
 const AllUser = () => {
    const userdata  = useSelector((store) => store.AuthReducer.userdata)
-    console.log(userdata)
 
+   const toast = useToast()
    const dispatch = useDispatch()
 
      useEffect(() =>{
@@ -22,7 +22,19 @@ const AllUser = () => {
      const handledelete = (_id) =>{
           dispatch(DeletePost(_id))
           .then((res) =>{
-            console.log(res)
+            if(res.type === "DELETE_DATA_SUCCESS"){
+              toast({
+                position: "top",
+                status: "success",
+                title: res.type,
+              });
+            }else{
+              toast({
+                position: "top",
+                status: "success",
+                title: res.type,
+              });
+            }
           })
           .catch(err=>{
             console.log(err)
@@ -55,6 +67,7 @@ const AllUser = () => {
   <Text pt='2' fontSize='sm'>
     {el.email}
   </Text>
+  <Text> {el.bio} </Text>
  
          <ButtonGroup spacing="4" mt="4" justifyItems={"center"}>
              <Link to={`/UserEdit/${el._id}`} >
