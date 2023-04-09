@@ -5,6 +5,7 @@ import SignTab from '../pages/SignTab'
 import CreatePost from './../components/CreatePost';
 import AllUser from './../components/AllUser';
 import SinglePost from '../components/SinglePost';
+import AuthenticateUser from '../pages/Userprofile/AuthenticateUser';
 
 
 const AllRoutes = () => {
@@ -17,6 +18,7 @@ const AllRoutes = () => {
         <Route path="/Allpost/:id" element={<SinglePost/>} />
         <Route path='/sign' element={<SignTab/>} />
         <Route path='/Createpost' element={<CreatePost/>} />
+         <Route path="/profile" element={<AuthenticateUser/>} />
         <Route path='/user' element={<AllUser/>} />
 
      </Routes>

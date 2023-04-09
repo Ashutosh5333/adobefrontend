@@ -22,6 +22,8 @@ const AdddataFail = () => {
 }
 
 
+//  ---------- get All post ------------ //
+
 const getpostdataReq = () =>{
    return {
       type: types.GET_DATA_REQUEST
@@ -39,6 +41,7 @@ const getpostdataFail = () => {
   }
 }
 
+//  ---------- get All post Single ------------ //
 
 const getsingledataReq = () =>{
    return {
@@ -57,6 +60,25 @@ const getsingledataFail = () => {
   }
 }
 
+
+         //  --------- My Post --------  //
+
+         const MypostReq = () =>{
+            return {
+               type: types.MYPOST_DATA_REQUEST,
+            }
+         } 
+         const MyPostSucess = (payload) => {
+            return {
+               type :types.MYPOST_DATA_SUCCESS,
+               payload,
+            }
+         }
+         const MyPostFail = () => {
+           return { 
+               type :types.MYPOST_DATA_FAILURE
+           }
+         }
 
 
 const token = JSON.parse(localStorage.getItem("token"))
@@ -80,6 +102,7 @@ return axios.get(`https://tough-knickers-colt.cyclic.app/Allpost`,{
 }
 
 
+// -----------  get Single post  ------------  //
  
 export const getSinglePostData =(_id) => (dispatch) => {
    dispatch(getsingledataReq())
@@ -97,7 +120,22 @@ return axios.get(`https://tough-knickers-colt.cyclic.app/Allpost/${_id}`,{
 }
 
 
+  //  --------------- Get MyPost ---------------- //
 
+  export const GetMyPost = (dispatch) => {
+   dispatch(MypostReq())
+return axios.get(`https://tough-knickers-colt.cyclic.app/post`,{
+    headers:{
+      "Content-Type":"application/json",
+      "Authorization":`Bearer ${token}`
+    },
+})
+ .then((res)=>{
+ return    dispatch(MyPostSucess(res.data))
+ }).catch((e)=>{
+  return    dispatch(MyPostFail())
+ })
+}
 
 
 

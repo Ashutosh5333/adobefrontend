@@ -7,7 +7,7 @@ import { MdAutoDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPostData } from "../Redux/AppReducer/action";
 import {Link} from "react-router-dom"
-import Skeltonlist from "./Skeltonlist";
+import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
 
     
 
@@ -90,7 +90,7 @@ const Dashboard = () => {
       </Box>
 
      })
-     : <Skeltonlist/>
+     : <UserSkeltonlist />
 
 
     }
