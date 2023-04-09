@@ -14,7 +14,7 @@ import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
 const Dashboard = () => {
   const dispatch = useDispatch()
    const AllPostlist = useSelector((store) =>store.AppReducer.PostData)
-   
+    console.log(AllPostlist)   
 
    useEffect(() =>{
      dispatch(getAllPostData)
@@ -57,7 +57,7 @@ const Dashboard = () => {
             <Image
               objectFit="cover"
               src={el.pic}
-              alt="Green double couch with wooden legs"
+              alt="PostImage"
               borderRadius="lg"
             />
             <Stack mt="6" spacing="3">
