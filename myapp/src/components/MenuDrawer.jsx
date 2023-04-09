@@ -47,7 +47,11 @@ const MenuDrawer = () => {
             </Link>
               <Flex alignItems="center" mb="20px" gap="10px" color="rgba(117, 117, 117, 1)" cursor="pointer">
               <BsBookmarks size="1.5em"/>
-                <Text fontSize={"1.2rem"} fontWeight="500">Lists</Text>
+                 <Link to="/user">
+
+                <Text fontSize={"1.2rem"} fontWeight="500">Users Lists</Text>
+                 </Link>
+
               </Flex>
               <Flex alignItems="center" mb="20px" gap="10px" color="rgba(117, 117, 117, 1)" cursor="pointer">
                 <RiFileList2Line size="1.5em"/>

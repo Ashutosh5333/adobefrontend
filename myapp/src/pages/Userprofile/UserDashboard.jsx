@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DeletePost, GetMyPost } from '../../Redux/AppReducer/action';
 import { UserSkeltonlist } from './UserSkeltonlist';
-import UserEdit from './UserEdit';
 import { MdAutoDelete } from 'react-icons/md';
 import { CiEdit } from 'react-icons/ci';
 

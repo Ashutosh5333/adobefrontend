@@ -42,6 +42,14 @@ const reducer = (state=initialState,{type,payload})=>{
                 isError:false,
                 token:payload
             }
+            
+        case  types.USER_DATA_SUCCESS : 
+        return {
+            ...state,
+            isLoading:false,
+            isError:false,
+            userdata:payload
+        }
 
         default:
             return state

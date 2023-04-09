@@ -1,6 +1,6 @@
-import {  Avatar,  Box,  Button,  ButtonGroup,Divider,  Heading,  Image,   Stack,  Text,  Wrap,  WrapItem, useToast,} from "@chakra-ui/react";
+import {  Avatar,  Box,  Button,  ButtonGroup,  Heading,  Image,   Stack,  Text,  Wrap,  WrapItem, useToast,} from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { Card,  CardBody, CardFooter } from "@chakra-ui/react";
 import { AiOutlineLike } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { MdAutoDelete } from "react-icons/md";
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
 
      AllPostlist.length >0 && AllPostlist.map((el) =>{
-      return   <Box key={el._id} width={"100%"} border={"1px solid gray"} gap="10" mb="10">
+      return   <Box key={el._id} width={"100%"}   gap="10" mb="10">
         <Card  maxW={{base:"2xl", md:"4xl",lg:"4xl"}}  m="auto">
           <CardBody>
             <Box display={"flex"} gap="5" p="4">
@@ -96,7 +96,7 @@ const Dashboard = () => {
               </Text>
             </Stack>
           </CardBody>
-          <Divider />
+          {/* <Divider color={"gray"} /> */}
           <CardFooter >
             <ButtonGroup spacing="2" justifyItems={"center"}>
              <Link to={`/Allpost/${el._id}`} >
