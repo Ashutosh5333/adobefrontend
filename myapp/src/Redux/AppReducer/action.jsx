@@ -197,6 +197,7 @@ export const  DeletePost  =(_id) => (dispatch) => {
  }
 
  
+ // -------------  Updated post   ----------- //
 
 export const  UpdatedPost  =(_id,payload) => (dispatch) => {
    dispatch(updatedpostReq())

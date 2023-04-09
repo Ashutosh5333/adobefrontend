@@ -107,9 +107,12 @@ const Dashboard = () => {
                 Like
               </Button>
 
+             <Link to={`/Edit/${el._id}`}>
               <Button variant="ghost" leftIcon={<CiEdit />}>
                 Edit
               </Button>
+             </Link>
+
               <Text textAlign={"center"} m="auto">
                 <MdAutoDelete  onClick={() => handledelete(el._id)} />
               </Text>
@@ -120,7 +123,6 @@ const Dashboard = () => {
 
      })
      : <UserSkeltonlist />
-
 
     }
     

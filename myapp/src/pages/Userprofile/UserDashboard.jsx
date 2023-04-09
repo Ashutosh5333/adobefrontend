@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import { DeletePost, GetMyPost } from '../../Redux/AppReducer/action';
 import { UserSkeltonlist } from './UserSkeltonlist';
 import UserEdit from './UserEdit';
+import { MdAutoDelete } from 'react-icons/md';
+import { CiEdit } from 'react-icons/ci';
 
 const UserDashboard = () => {
     const dispatch = useDispatch()
     const toast = useToast();
     const Mypost = useSelector((store) => store.AppReducer.Mypost)
-    // console.log(Mypost)
-
+   
 
      useEffect(() =>{
        dispatch(GetMyPost)
@@ -108,13 +109,21 @@ const UserDashboard = () => {
    
 
            <Box textAlign={"start"} ml="10" mt="4" mb="4" display={"flex"}  gap="10">
-             <Button  onClick={() => handledelete(el._id)} justifyContent={"flex-start"} colorScheme='red'>  Delete post  </Button>          
-
-              <Link to={`/task/${el._id}`}>
              <Button   justifyContent={"flex-start"}>
-              <UserEdit/>
+                   View
+              </Button>  
+
+
+              <Link to={`/Edit/${el._id}`}>
+             <Button  variant="ghost"  leftIcon={<CiEdit />}>
+                Edit
               </Button>          
               </Link>
+
+             <Button  onClick={() => handledelete(el._id)} justifyContent={"flex-start"} >  <MdAutoDelete/>  </Button>          
+
+                     
+             
             
           </Box>
     

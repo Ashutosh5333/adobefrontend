@@ -13,7 +13,6 @@ const UserEdit = () => {
   
       const [post,SetPost] = useState({
            content:"",
-        
       })
 
        const handleChange = () =>{
@@ -30,7 +29,7 @@ const UserEdit = () => {
         aria-label="Focus moved to this box"
       ></Box>
 
-      <Button onClick={onOpen}>Edit</Button>
+      <Button variant="ghost" onClick={onOpen}>Edit</Button>
 
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

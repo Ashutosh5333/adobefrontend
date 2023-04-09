@@ -6,6 +6,7 @@ import CreatePost from './../components/CreatePost';
 import AllUser from './../components/AllUser';
 import SinglePost from '../components/SinglePost';
 import AuthenticateUser from '../pages/Userprofile/AuthenticateUser';
+import Edit from '../components/Edit';
 
 
 const AllRoutes = () => {
@@ -16,6 +17,7 @@ const AllRoutes = () => {
      <Routes>
         <Route path='/' element={<Home/>} />
         <Route path="/Allpost/:id" element={<SinglePost/>} />
+        <Route path="/Edit/:id" element={<Edit/>} />
         <Route path='/sign' element={<SignTab/>} />
         <Route path='/Createpost' element={<CreatePost/>} />
          <Route path="/profile" element={<AuthenticateUser/>} />
