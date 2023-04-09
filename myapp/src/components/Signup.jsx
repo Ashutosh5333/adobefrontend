@@ -1,16 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {  Button,  Card,  CardBody,  Input,  InputGroup,  InputLeftElement,  InputRightElement,  VStack,  useColorModeValue,useToast,} from "@chakra-ui/react";
 import { CiUser } from "react-icons/ci";
 import { EmailIcon, UnlockIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { BsCardImage } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { Signupdata } from "../Redux/AuthReducer/action";
 
 const Signup = () => {
   const colorScheme = useColorModeValue("blue", "green");
   const [show, setShow] = useState(false);
-  const [image, SetImage] = useState("");
-  const [url, SetUrl] = useState("");
-   const [pic,Setpic] = useState("")
+  const dispatch = useDispatch();
+ 
   const toast = useToast();
+
+  const [post, SetPost] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  // http://localhost:8000/users/create
+  // https://tough-knickers-colt.cyclic.app/
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    SetPost({ ...post, [name]: value });
+  };
+ 
+
+     const handleSubmit = () => {
+        dispatch(Signupdata(post))
+        .then((res) => {
+          console.log(res);
+          if (
+            res.type === "GET_SIGNUP_SUCCESS" &&
+            res.payload.data !== "user is already present"
+          ) {
+            toast({
+              position: "top",
+              status: "success",
+              title: "user created Successfully Account",
+            });
+          } else {
+            toast({
+              position: "top",
+              status: "error",
+              title: "user Already exits try Another",
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast({
+            position: "top",
+            status: "error",
+            title: "Something went wrong",
+          });
+        });
+
+
+     }
 
   
   const handleClickShow = () => {
@@ -34,11 +82,13 @@ const Signup = () => {
                 placeholder="Name*"
                 type="name"
                 name="name"
-              
+                onChange={handleChange}
+                
                 size="lg"
               />
             </InputGroup>
 
+{/* 
             <InputGroup position="relative">
               <InputLeftElement
                 textAlign={"center"}
@@ -52,8 +102,9 @@ const Signup = () => {
                 type="file"
                 name="pic"
                 onChange={(e) => SetImage(e.target.files[0])}
+               
                 size="lg"
-                accept="image/*"
+               
                 sx={{
                   "::file-selector-button": {
                     height: 8,
@@ -63,7 +114,7 @@ const Signup = () => {
                   },
                 }}
               />
-            </InputGroup>
+            </InputGroup> */}
 
             <InputGroup position="relative">
               <InputLeftElement
@@ -77,6 +128,7 @@ const Signup = () => {
                 type="email"
                 name="email"
                 size="lg"
+                onChange={handleChange}
                
               />
             </InputGroup>
@@ -93,7 +145,7 @@ const Signup = () => {
                 placeholder="Password*"
                 name="password"
                 size="lg"
-             
+                onChange={handleChange}
               />
               <InputRightElement width="4.5rem" position="absolute" top="1">
                 <Button
@@ -111,6 +163,7 @@ const Signup = () => {
               </InputRightElement>
             </InputGroup>
             <Button
+            onClick={handleSubmit}
               width="100%"
               colorScheme={colorScheme}
               size="lg"

@@ -1,8 +1,9 @@
 import React, {  useState } from "react";
-import {  VStack,  Input,  Button,  InputGroup,  InputRightElement,  CircularProgress, CircularProgressLabel,   useToast,   InputLeftElement,  Card,  CardBody, useColorModeValue,} from "@chakra-ui/react";
+import {  VStack,  Input,  Button,  InputGroup,  InputRightElement,  useToast,   InputLeftElement,  Card,  CardBody, useColorModeValue,} from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon, EmailIcon, UnlockIcon } from "@chakra-ui/icons";
 import {json, useNavigate} from "react-router-dom";
-
+import { Loginupdata } from "../Redux/AuthReducer/action";
+import { useDispatch } from "react-redux";
 
 
 
@@ -10,16 +11,53 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const colorScheme = useColorModeValue("blue", "green");
   const toast = useToast()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   
-
   const [post ,SetPost] = useState({
     email:"",
     password:"",
   })
 
+  const handleChange = (e) => {
+    const {name,value} = e.target
+    SetPost({...post,[name]:value})
+}
 
+const handleSubmit = () =>{
+  dispatch(Loginupdata(post))
+  .then((res) =>{
+   // console.log(res)
+      if(res.type === "GET_LOGIN_SUCCESS" && res.payload.data.msg == "Login sucessfull"){
+       toast({
+         position:"top",
+         status : "success",
+         title:res.payload.data.msg
+        })
+         localStorage.setItem("token", JSON.stringify(res.payload.data.token))
+          localStorage.setItem("data",JSON.stringify(res.payload.data.data))
+         navigate("/")
+         window.location.reload()
+      }else{
+       toast({
+         position:"top",
+         status : "error",
+         title:res.payload.data
+        })
+      }
+   
+   
+  })
+  .catch((err) =>{
+   console.log(err)
+   toast({
+     position:"top",
+     status : "error",
+     title:err
+    })
+  })
+}
 
   return (
     <>
@@ -38,7 +76,7 @@ const Login = () => {
               type="email"
               name="email"
               size="lg"
-        
+              onChange={handleChange}
             />
           </InputGroup>
 
@@ -54,6 +92,7 @@ const Login = () => {
               placeholder="Password*"
               name="password"
               size="lg"
+              onChange={handleChange}
               
             />
             <InputRightElement width="4.5rem" position="absolute" top="1">
@@ -75,6 +114,7 @@ const Login = () => {
           <Button
             width="100%"
             size="lg"
+            onClick={handleSubmit}
             colorScheme={colorScheme}
             loadingText={"Login"}
             isDisabled={

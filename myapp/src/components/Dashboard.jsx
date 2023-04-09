@@ -1,27 +1,18 @@
-import {
-    Avatar,
-  Box,
-  Button,
-  ButtonGroup,
-  Divider,
-  Heading,
-  Image,
-  Stack,
-  Text,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
+import {  Avatar,  Box,  Button,  ButtonGroup,Divider,  Heading,  Image,  Stack,  Text,  Wrap,  WrapItem,} from "@chakra-ui/react";
 import React from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { AiOutlineLike } from "react-icons/ai";
 import { CiEdit } from "react-icons/ci";
 import { MdAutoDelete } from "react-icons/md";
 
+
+
+
 const Dashboard = () => {
   return (
     <>
       <Box width={"100%"} border={"5px solid pink"}>
-        <Card maxW="4xl" m="auto">
+        <Card  maxW={{base:"2xl", md:"4xl",lg:"4xl"}}  m="auto">
           <CardBody>
             <Box display={"flex"} gap="5" p="4">
               <Wrap>
@@ -52,7 +43,7 @@ const Dashboard = () => {
               borderRadius="lg"
             />
             <Stack mt="6" spacing="3">
-              <Heading size="md" letterSpacing={1} textAlign={"start"}>Living room Sofa</Heading>
+              <Heading size="md"  letterSpacing={1} textAlign={"start"} fontFamily={"playfair"}>Living room Sofa</Heading>
               <Text noOfLines={3}  textAlign={"start"} fontSize={{base:".8rem",md:"1rem",lg:"1rem" }} letterSpacing={2} >
                 This sofa is perfect for modern tropical spaces, baroque
                 inspired spaces, earthy toned spaces and for people who love a
