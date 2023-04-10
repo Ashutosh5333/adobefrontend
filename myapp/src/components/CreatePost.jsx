@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Box, Button, Divider, Input, Text, useToast } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux';
+import { AddPost } from '../Redux/AppReducer/action';
 
 
 const CreatePost = () => {
+  const dispatch = useDispatch()
 const [image,SetImage] = useState("");
 const [title,SetTitle] = useState("");
 const [url,SetUrl] = useState("");
+const [pic,Setpic] = useState("");
 const toast = useToast()
 const [content,SetContent] = useState("")
 
@@ -13,9 +17,9 @@ const [content,SetContent] = useState("")
   const payload={
      title,
      content,
-     pic:url
+     pic
   }
-  // console.log(payload)
+
 
 
    const token = JSON.parse(localStorage.getItem("token"))
@@ -39,44 +43,36 @@ const [content,SetContent] = useState("")
   };
 
   const handleSubmit = () =>{
-    Imagepost()
+      dispatch(AddPost(payload))
+      .then((res) => {
+        if(res.type ==="ADD_DATA_SUCCESS" && res.payload.msg !== "data created sucessfully" ){
+          toast({
+            position:"top",
+            status : "error",
+            title:res.payload.err
+           })
+         }
+         else{
+          toast({
+            position:"top",
+            status : "success",
+            title:res.payload.msg
+           })
+         }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          position : 'top',
+          colorScheme : 'red', 
+          status : "error",
+          title:err
+        })
+      });
+  
  }
 
   
-  useEffect(() =>{
-          if(url){
-            fetch(`https://tough-knickers-colt.cyclic.app/post/create`, {
-              method: "post",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-              },
-              body: JSON.stringify({
-                title,
-                content,
-                pic:url
-              }),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                // console.log(data)
-                toast({
-                  position : 'top',
-                  status : "success",
-                  description:data.msg
-                })
-              })
-              .catch((err) => {
-                console.log(err);
-                toast({
-                  position : 'top',
-                  colorScheme : 'red', 
-                  status : "error",
-                  title:err
-                })
-              });
-          }
-      },[url])
 
   
 
@@ -95,7 +91,7 @@ const [content,SetContent] = useState("")
        <Box  width="80vw" m="auto"  mt="10">
           <Input variant={"unstyled"} name="title"
            onChange={(e) => SetTitle(e.target.value)}
-           fontSize={{base:"1.5rem",md:"1.5rem",lg:"3.4rem" }} placeholder='Topic' />
+           fontSize={{base:"1.5rem",md:"1.5rem",lg:"3.4rem" }} placeholder='Title' />
        </Box>
 
        <Box  width="80vw" m="auto"  mt="10">
@@ -106,9 +102,9 @@ const [content,SetContent] = useState("")
 
        <Box  width="80vw" m="auto"  mt="10">
            
-          <Input variant={"unstyled"} name="image"
-            type="file"
-            onChange={(e) => SetImage(e.target.files[0])}
+          <Input variant={"unstyled"} name="url"
+            
+            onChange={(e) => Setpic(e.target.value)}
            fontSize={{base:"1.5rem",md:"1.5rem",lg:"2rem" }} placeholder='+ Add a Image' />
            
        </Box>

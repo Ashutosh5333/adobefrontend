@@ -1,23 +1,20 @@
-
+import axios from "axios"
 
 const token = JSON.parse(localStorage.getItem("token"));
 
 
 
 export const likepost = (_id) => {
-  fetch(`https://tough-knickers-colt.cyclic.app/likes`, {
-    method: "put",
+  axios.patch(`https://tough-knickers-colt.cyclic.app/post/${_id}/like`, {
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`,
     },
-    body:JSON.stringify({
-      postId:_id
-    })
-  })
-    .then((res) => res.json())
-    .then((dat) => {
   
+  })
+    .then((dat) => {
+    // console.log(dat)
+    window.location.reload();
     })
     .catch((err) => {
       console.log(err);
@@ -25,19 +22,20 @@ export const likepost = (_id) => {
   
 };
 
+
+
 // ----------------  Unlikepost ------------ //
 
 export const Unlikepost = (_id) => {
-    fetch(`https://tough-knickers-colt.cyclic.app/unlikes/${_id}`, {
-      method: "put",
+  axios.patch(`https://tough-knickers-colt.cyclic.app/post/${_id}/dislike`, {
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
     })
-      .then((res) => res.json())
+
       .then((dat) => {
-        console.log(dat);
+        // console.log(dat);
         window.location.reload()
       }) 
       .catch((err) => {

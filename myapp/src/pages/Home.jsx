@@ -14,7 +14,7 @@ const Home = () => {
           <Dashboard/>
         </Box>
 
-        <Box  border={"3px solid green"} w={{base:"90vw",md:"25vw",lg:"25vw"}}>
+        <Box   w={{base:"90vw",md:"25vw",lg:"25vw"}}>
            <Heading fontSize="1rem" > Top Active Users </Heading>
                <TopActive/>
 

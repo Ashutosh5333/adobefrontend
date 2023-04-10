@@ -10,13 +10,14 @@ import {Link} from "react-router-dom"
 import { UserSkeltonlist } from "../pages/Userprofile/UserSkeltonlist";
 import {BiDislike} from "react-icons/bi"
 import { likepost } from "./likes/PostFetch";
+import { Unlikepost } from "./likes/PostFetch";
     
 
 const Dashboard = () => {
   const dispatch = useDispatch()
     const toast = useToast();
    const AllPostlist = useSelector((store) =>store.AppReducer.PostData)
-    // console.log(AllPostlist)   
+   console.log(AllPostlist)
 
    useEffect(() =>{
      dispatch(getAllPostData)
@@ -25,13 +26,13 @@ const Dashboard = () => {
    const handledelete = (_id) =>{
     dispatch(DeletePost(_id))
     .then((res) =>{
-      // console.log(res)
-        if(res.type === "DELETE_DATA_SUCCESS"){
+        if(res.type == "DELETE_DATA_SUCCESS"){
           toast({
             position: "top",
             status: "success",
             title: res.type,
           });
+      
         }else{
           toast({
             position: "top",
@@ -86,6 +87,7 @@ const Dashboard = () => {
 
             <Image
               objectFit="cover"
+               w="100%"
               src={el.pic}
               alt="PostImage"
               borderRadius="lg"
@@ -97,21 +99,32 @@ const Dashboard = () => {
               </Text>
             </Stack>
           </CardBody>
-          {/* <Divider color={"gray"} /> */}
+          
           <CardFooter >
             <ButtonGroup spacing="2" justifyItems={"center"}>
-             <Link to={`/Allpost/${el._id}`} >
+             <Link to={`/Allpost/${el._id} `} >
               <Button>View</Button>
+
              </Link>
 
-                           
-              <Button flex="1" onClick={() => likepost(el._id)} variant="ghost" leftIcon={<AiOutlineLike />}>
-                Like
-              </Button>
-
-              <Button flex="1" variant="ghost" leftIcon={<BiDislike />}>
+            
+          <Button flex="1"  onClick={() => Unlikepost(el._id)} variant="ghost" leftIcon={<BiDislike />}>
                 unLike
               </Button>
+
+              <Button flex="1" onClick={() => likepost(el._id)}  isDisabled={el.likes=="1"} variant="ghost" leftIcon={<AiOutlineLike />}>
+               
+               <Text> {el.likes} </Text>
+                Like
+
+              </Button>
+                
+               
+
+                  
+           
+
+              
 
              <Link to={`/Edit/${el._id}`}>
               <Button variant="ghost" leftIcon={<CiEdit />}>

@@ -73,10 +73,17 @@ const Navbar = () => {
           width={{ base: "", md: "30%", lg: "25%" }}
           justifyContent="space-around"
           fontSize="25px"
+          gap="5"
         >
           <Link to={"/Createpost"}>
-            <Text fontSize={"1.2rem"} fontWeight="600">
+            <Text fontSize={"1rem"} fontWeight="600">
                Create Post
+            </Text>
+          </Link>
+
+          <Link to={"/user"}>
+            <Text fontSize={"1rem"} fontWeight="600">
+                UserList
             </Text>
           </Link>
 
@@ -84,7 +91,7 @@ const Navbar = () => {
             <MenuDrawer/>
           ) : (
             <Link to={"/sign"}>
-              <Text fontSize={"1.2rem"} fontWeight="600">
+              <Text fontSize={"1rem"} fontWeight="600">
                 Login
               </Text>
             </Link>

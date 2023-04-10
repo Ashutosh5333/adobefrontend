@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Box, Heading, Stack, StackDivider, Avatar, ButtonGroup, Button, useToast } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody,  Box, Heading, Stack, StackDivider, Avatar, ButtonGroup, Button, useToast } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeletePost, GetUserdata } from '../Redux/AuthReducer/action';

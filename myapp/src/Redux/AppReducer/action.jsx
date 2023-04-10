@@ -190,7 +190,7 @@ export const  DeletePost  =(_id) => (dispatch) => {
      },
    })
     .then((res) => {
-     return   dispatch(Deletedatasucess());
+     return   dispatch(Deletedatasucess(res));
     }).catch((e)=> {
     return    dispatch(Deletedatafai())
     })
@@ -211,6 +211,23 @@ export const  UpdatedPost  =(_id,payload) => (dispatch) => {
      return   dispatch(updateducess(res.data));
     }).catch((e)=> {
     return    dispatch(updatedFail())
+    })
+ }
+
+
+
+ export const  AddPost  =(payload) => (dispatch) => {
+   dispatch(AdddataReq())
+   return axios.post(`https://tough-knickers-colt.cyclic.app/post/create`, payload,{
+    headers:{
+       "Content-Type":"application/json",
+       "Authorization":`Bearer ${token}`
+     },
+   })
+    .then((res) => {
+     return   dispatch(AdddataSucess(res.data));
+    }).catch((e)=> {
+    return    dispatch(AdddataFail())
     })
  }
 
